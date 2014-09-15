@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.chanjar.me" id="adhoc-definitions">
-  <process id="multi-flow-simple" name="multi-flow-simple" isExecutable="true">
+  <process id="multi-flow-nogateway" name="multi-flow-nogateway" isExecutable="true">
     <startEvent id="startevent1" name="Start"></startEvent>
     <endEvent id="endevent1" name="End"></endEvent>
     <userTask id="usertask1" name="usertask1"></userTask>
@@ -12,8 +12,8 @@
     <sequenceFlow id="flow4" sourceRef="usertask2" targetRef="endevent1"></sequenceFlow>
     <sequenceFlow id="flow5" sourceRef="usertask3" targetRef="endevent1"></sequenceFlow>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_multi-flow-simple">
-    <bpmndi:BPMNPlane bpmnElement="multi-flow-simple" id="BPMNPlane_multi-flow-simple">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_multi-flow-nogateway">
+    <bpmndi:BPMNPlane bpmnElement="multi-flow-nogateway" id="BPMNPlane_multi-flow-nogateway">
       <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="10.0" y="175.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>

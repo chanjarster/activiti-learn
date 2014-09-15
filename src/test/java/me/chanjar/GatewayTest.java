@@ -1,9 +1,12 @@
 package me.chanjar;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.test.ActivitiRule;
 import org.activiti.engine.test.Deployment;
@@ -15,13 +18,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * 多个outgoing sequence flow的测试
+ * gateway测试
  * @author qianjia
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:springTypicalUsageTest-context.xml")
-public class MultiFlowTest {
+public class GatewayTest {
     
     @Autowired
     private RuntimeService runtimeService;
@@ -42,9 +45,9 @@ public class MultiFlowTest {
      * </pre>
      */
     @Test
-    @Deployment(resources="me/chanjar/multi-flow-simple.bpmn")
-    public void simple() {
-      String processDefinitionKey = "multi-flow-simple";
+    @Deployment(resources="me/chanjar/multi-flow-nogateway.bpmn")
+    public void nogateway() {
+      String processDefinitionKey = "multi-flow-nogateway";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
       Task task = taskService.createTaskQuery().taskDefinitionKey("usertask1").singleResult();
@@ -140,6 +143,50 @@ public class MultiFlowTest {
       Task usertask3 = taskService.createTaskQuery().taskDefinitionKey("usertask3").singleResult();
       taskService.complete(usertask3.getId());
 
+      assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
+     
+    }
+    
+    /**
+     * <pre>
+     * 一个user task + event gateway + 2个outgoing sequence flow
+     * event gateway和上面三个都不同
+     * 1. event gateway的outgoing sequence flow上加condition是没用的
+     * 2. 只有当某个outgoing sequence flow所指向的intermediate catching event抓到了event时，
+     * event gateway才会决定执行哪条sequence flow。在本例中，一个是timer intermediate 
+     * catching event,一个是signal intermediate catching event。
+     * 在等待5秒过后，timer所对应的那条sequence flow执行了，此时才会出现usertask2。
+     * </pre>
+     * @throws InterruptedException 
+     */
+    @Test
+    @Deployment(resources="me/chanjar/multi-flow-event-gateway.bpmn")
+    public void eventGateway() throws InterruptedException {
+      String processDefinitionKey = "multi-flow-event-gateway";
+      runtimeService.startProcessInstanceByKey(processDefinitionKey);
+      // 完成一个任务
+      Task task = taskService.createTaskQuery().taskDefinitionKey("usertask1").singleResult();
+      taskService.complete(task.getId());
+      
+      // 你可以在这里触发名为abc的signal event，这样的话就不会有usertask2了
+      // 也可以选择不触发signal event，等待10秒钟后，usertask2会出现
+      boolean signalIt = false;
+      if (signalIt) {
+        List<Execution> executions = runtimeService
+            .createExecutionQuery()
+            .processDefinitionKey(processDefinitionKey)
+            .activityId("eventgateway1")  // process definition里event gateway定义的id
+            .list();
+        for(Execution execution : executions) {
+          runtimeService.signalEventReceived("abc", execution.getId());
+        }
+        Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+        assertNull(usertask2);
+      } else {
+        Thread.sleep(10 * 1000);
+        Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+        taskService.complete(usertask2.getId());
+      }
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
      
     }
