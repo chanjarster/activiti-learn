@@ -19,6 +19,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * gateway测试
+ * <pre>
+ * 1. 没用gateway，一个user task多出口
+ * 2. exclusive gateway
+ * 3. parallel gateway
+ * 4. inclusive gateway
+ * </pre>
  * @author qianjia
  *
  */
@@ -45,18 +51,18 @@ public class GatewayTest {
      * </pre>
      */
     @Test
-    @Deployment(resources="me/chanjar/multi-flow-nogateway.bpmn")
-    public void nogateway() {
-      String processDefinitionKey = "multi-flow-nogateway";
+    @Deployment(resources="me/chanjar/gateway-none.bpmn")
+    public void gatewayNone() {
+      String processDefinitionKey = "gateway-none";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("usertask1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task.getId());
       
-      Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+      Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(usertask2.getId());
       
-      Task usertask3 = taskService.createTaskQuery().taskDefinitionKey("usertask3").singleResult();
+      Task usertask3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       taskService.complete(usertask3.getId());
 
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
@@ -72,20 +78,20 @@ public class GatewayTest {
      * </pre>
      */
     @Test
-    @Deployment(resources="me/chanjar/multi-flow-exclusive-gateway.bpmn")
+    @Deployment(resources="me/chanjar/gateway-exclusive.bpmn")
     public void exclusiveGateway() {
-      String processDefinitionKey = "multi-flow-exclusive-gateway";
+      String processDefinitionKey = "gateway-exclusive";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("usertask1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task.getId());
       
-      Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+      Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       if (usertask2 != null) {
         taskService.complete(usertask2.getId());
       }
       
-      Task usertask3 = taskService.createTaskQuery().taskDefinitionKey("usertask3").singleResult();
+      Task usertask3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       if (usertask3 != null) {
         taskService.complete(usertask3.getId());
       }
@@ -102,18 +108,18 @@ public class GatewayTest {
      * </pre>
      */
     @Test
-    @Deployment(resources="me/chanjar/multi-flow-parallel-gateway.bpmn")
+    @Deployment(resources="me/chanjar/gateway-parallel.bpmn")
     public void parallelGateway() {
-      String processDefinitionKey = "multi-flow-parallel-gateway";
+      String processDefinitionKey = "gateway-parallel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("usertask1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task.getId());
       
-      Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+      Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(usertask2.getId());
       
-      Task usertask3 = taskService.createTaskQuery().taskDefinitionKey("usertask3").singleResult();
+      Task usertask3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       taskService.complete(usertask3.getId());
 
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
@@ -129,18 +135,18 @@ public class GatewayTest {
      * </pre>
      */
     @Test
-    @Deployment(resources="me/chanjar/multi-flow-inclusive-gateway.bpmn")
+    @Deployment(resources="me/chanjar/gateway-inclusive.bpmn")
     public void inclusivelGateway() {
-      String processDefinitionKey = "multi-flow-inclusive-gateway";
+      String processDefinitionKey = "gateway-inclusive";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("usertask1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task.getId());
       
-      Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+      Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(usertask2.getId());
       
-      Task usertask3 = taskService.createTaskQuery().taskDefinitionKey("usertask3").singleResult();
+      Task usertask3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       taskService.complete(usertask3.getId());
 
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
@@ -160,12 +166,12 @@ public class GatewayTest {
      * @throws InterruptedException 
      */
     @Test
-    @Deployment(resources="me/chanjar/multi-flow-event-gateway.bpmn")
+    @Deployment(resources="me/chanjar/gateway-event.bpmn")
     public void eventGateway() throws InterruptedException {
-      String processDefinitionKey = "multi-flow-event-gateway";
+      String processDefinitionKey = "gateway-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("usertask1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task.getId());
       
       // 你可以在这里触发名为abc的signal event，这样的话就不会有usertask2了
@@ -180,11 +186,11 @@ public class GatewayTest {
         for(Execution execution : executions) {
           runtimeService.signalEventReceived("abc", execution.getId());
         }
-        Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+        Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
         assertNull(usertask2);
       } else {
         Thread.sleep(10 * 1000);
-        Task usertask2 = taskService.createTaskQuery().taskDefinitionKey("usertask2").singleResult();
+        Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
         taskService.complete(usertask2.getId());
       }
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());

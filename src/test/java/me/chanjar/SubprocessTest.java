@@ -49,7 +49,7 @@ public class SubprocessTest {
       String processDefinitionKey = "subprocess-without-end-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("task1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("task1").singleResult();
       taskService.complete(task.getId());
       
       // 判断已经启动了一个sub process
@@ -57,7 +57,7 @@ public class SubprocessTest {
       assertEquals(2, runtimeService.createExecutionQuery().processDefinitionKey(processDefinitionKey).count());
       
       // 完成一个subprocess里的任务
-      Task subTask1 = taskService.createTaskQuery().taskDefinitionKey("subtask1").singleResult();
+      Task subTask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("subtask1").singleResult();
       taskService.complete(subTask1.getId());
       
       // 判断process instance已经结束
@@ -74,7 +74,7 @@ public class SubprocessTest {
       String processDefinitionKey = "subprocess-with-end-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("task1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("task1").singleResult();
       taskService.complete(task.getId());
       
       // 判断已经启动了一个sub process
@@ -82,11 +82,11 @@ public class SubprocessTest {
       assertEquals(2, runtimeService.createExecutionQuery().processDefinitionKey(processDefinitionKey).count());
       
       // 完成一个subprocess里的任务
-      Task subTask1 = taskService.createTaskQuery().taskDefinitionKey("subtask1").singleResult();
+      Task subTask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("subtask1").singleResult();
       taskService.complete(subTask1.getId());
       
       // 完成后面的一个任务
-      Task task2 = taskService.createTaskQuery().taskDefinitionKey("task2").singleResult();
+      Task task2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("task2").singleResult();
       taskService.complete(task2.getId());
       
       // 判断process instance已经结束
@@ -104,7 +104,7 @@ public class SubprocessTest {
       String processDefinitionKey = "subprocess-nested";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().taskDefinitionKey("task1").singleResult();
+      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("task1").singleResult();
       taskService.complete(task.getId());
       
       // 判断已经启动了一个sub process
@@ -112,11 +112,11 @@ public class SubprocessTest {
       assertEquals(2, runtimeService.createExecutionQuery().processDefinitionKey(processDefinitionKey).count());
       
       // 完成一个subprocess里的任务
-      Task subTask1 = taskService.createTaskQuery().taskDefinitionKey("subtask1").singleResult();
+      Task subTask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("subtask1").singleResult();
       taskService.complete(subTask1.getId());
       
       // 完成嵌套的subprocess里的任务
-      Task subTask2 = taskService.createTaskQuery().taskDefinitionKey("subtask2").singleResult();
+      Task subTask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("subtask2").singleResult();
       taskService.complete(subTask2.getId());
       
       // 判断process instance已经结束

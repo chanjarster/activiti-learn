@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.chanjar.me" id="adhoc-definitions">
-  <process id="multi-flow-parallel-gateway" name="multi-flow-parallel-gateway" isExecutable="true">
+  <process id="gateway-parallel" name="gateway-parallel" isExecutable="true">
     <startEvent id="startevent1" name="Start"></startEvent>
     <endEvent id="endevent1" name="End"></endEvent>
     <userTask id="usertask1" name="usertask1"></userTask>
@@ -16,8 +16,8 @@
     <sequenceFlow id="flow6" sourceRef="usertask1" targetRef="parallelgateway1"></sequenceFlow>
     <parallelGateway id="parallelgateway1" name="Exclusive Gateway"></parallelGateway>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_multi-flow-parallel-gateway">
-    <bpmndi:BPMNPlane bpmnElement="multi-flow-parallel-gateway" id="BPMNPlane_multi-flow-parallel-gateway">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_gateway-parallel">
+    <bpmndi:BPMNPlane bpmnElement="gateway-parallel" id="BPMNPlane_gateway-parallel">
       <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="10.0" y="175.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
