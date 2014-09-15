@@ -1,7 +1,6 @@
 package me.chanjar;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -16,12 +15,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
+ * sub process的测试
  * <pre>
- * 测试sub process，
  * sub process必须有一个start event，否则流程无法启动
  * sub process里可以有也可以没有end event
  * sub process里的end event只对其所属的sub process有效，不会导致整个流程结束
- * 当启动sub process的时候，会产生一条ACT_RU_EXECUTION记录
+ * sub process里的task都结束的时候，才会结束
+ * 当启动sub process的时候，会产生一条ACT_RU_EXECUTION记录，只要sub process没有结束，会一直存在
  * </pre>
  * @author qianjia
  *
