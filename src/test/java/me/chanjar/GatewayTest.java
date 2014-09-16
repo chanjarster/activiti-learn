@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 2. exclusive gateway
  * 3. parallel gateway
  * 4. inclusive gateway
+ * 5. event gateway
  * </pre>
  * @author qianjia
  *
@@ -162,6 +163,7 @@ public class GatewayTest {
      * event gateway才会决定执行哪条sequence flow。在本例中，一个是timer intermediate 
      * catching event,一个是signal intermediate catching event。
      * 在等待5秒过后，timer所对应的那条sequence flow执行了，此时才会出现usertask2。
+     * 3. event gateway后面只能连接intermediate catching event
      * </pre>
      * @throws InterruptedException 
      */
@@ -176,12 +178,12 @@ public class GatewayTest {
       
       // 你可以在这里触发名为abc的signal event，这样的话就不会有usertask2了
       // 也可以选择不触发signal event，等待10秒钟后，usertask2会出现
-      boolean signalIt = false;
+      boolean signalIt = true;
       if (signalIt) {
         List<Execution> executions = runtimeService
             .createExecutionQuery()
             .processDefinitionKey(processDefinitionKey)
-            .activityId("eventgateway1")  // process definition里event gateway定义的id
+            .signalEventSubscriptionName("abc")  // process definition里event gateway定义的id
             .list();
         for(Execution execution : executions) {
           runtimeService.signalEventReceived("abc", execution.getId());

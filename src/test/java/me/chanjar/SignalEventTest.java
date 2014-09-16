@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:springTypicalUsageTest-context.xml")
-public class EventTest {
+public class SignalEventTest {
     
     @Autowired
     private RuntimeService runtimeService;
@@ -36,12 +36,12 @@ public class EventTest {
     public ActivitiRule activitiSpringRule;
     
     /**
-     * 在subprocess里没有end event
+     * intermediate signal throw event
      */
     @Test
-    @Deployment(resources="me/chanjar/event-intermediate-signal-throw-event.bpmn")
+    @Deployment(resources="me/chanjar/intermediate-signal-throw-event.bpmn")
     public void intermediateSignalThrowEvent() {
-      String processDefinitionKey = "event-intermediate-signal-throw-event";
+      String processDefinitionKey = "intermediate-signal-throw-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
       Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
