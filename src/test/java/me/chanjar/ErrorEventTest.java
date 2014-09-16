@@ -1,8 +1,6 @@
 package me.chanjar;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -67,7 +65,7 @@ public class ErrorEventTest {
       // 完成一个任务
       Task task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task1.getId());
-
+    
       // 完成一个任务
       Task task2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(task2.getId());
@@ -96,7 +94,7 @@ public class ErrorEventTest {
       // 完成一个任务
       Task task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task1.getId());
-
+    
       // 完成一个任务
       Task task2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(task2.getId());

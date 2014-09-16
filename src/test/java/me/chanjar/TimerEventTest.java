@@ -51,7 +51,7 @@ public class TimerEventTest {
       // 完成一个任务
       Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task.getId());
-
+    
       // 判断process instance已经结束
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }
@@ -61,7 +61,7 @@ public class TimerEventTest {
      * 
      * <pre>
      * 当流程走到usertask1上的时候，如果在5秒钟内没有完成usertask1
-     * 那么就会取消usertask1，并进入到usertask2上，完成usertask2才能结束流程恒
+     * 那么就会取消usertask1，并进入到usertask2上，完成usertask2才能结束流程
      * 相反，如果在5秒钟内完成了usertask1，那么流程就直接结束了
      * 
      * 本例人为制造超时
@@ -96,14 +96,14 @@ public class TimerEventTest {
      */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-cancel.bpmn")
-    public void timerBoundaryEventOnTimeFinishAndCancelActivity() throws InterruptedException {
+    public void timerBoundaryEventFinishOnTimeAndCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       
       // 完成一个任务
       Task task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task1.getId());
-
+    
       Task task2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       assertNull(task2);
       
@@ -126,7 +126,7 @@ public class TimerEventTest {
      */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-not-cancel.bpmn")
-    public void timerBoundaryEventTimeoutAndDontCancelActivity() throws InterruptedException {
+    public void timerBoundaryEventTimeoutAndNotCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-not-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       
@@ -135,7 +135,7 @@ public class TimerEventTest {
       Task task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       assertNotNull(task1);
       taskService.complete(task1.getId());
-
+    
       Task task2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(task2.getId());
       
@@ -147,19 +147,19 @@ public class TimerEventTest {
     /**
      * timer boundary event，定义在usertask1上，5秒钟时长是5秒，cancel activity为false
      * 
-     * 和 {@link #timerBoundaryEventTimeoutAndDontCancelActivity()} 一样，只是不人为制造超时
+     * 和 {@link #timerBoundaryEventTimeoutAndNotCancelActivity()} 一样，只是不人为制造超时
      * @throws InterruptedException
      */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-not-cancel.bpmn")
-    public void timerBoundaryEventNotCancelNoWait() throws InterruptedException {
+    public void timerBoundaryEventFinishOnTimeAndNotCancel() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-not-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       
       // 完成一个任务
       Task task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       taskService.complete(task1.getId());
-
+    
       Task task2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       assertNull(task2);
       
@@ -190,7 +190,7 @@ public class TimerEventTest {
       task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
       assertNotNull(task1);
       taskService.complete(task1.getId());
-
+    
       // 判断process instance已经结束
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }

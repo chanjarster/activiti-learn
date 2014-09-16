@@ -100,7 +100,7 @@ public class SubprocessTest {
     @Test
     @Deployment(resources="me/chanjar/subprocess-nested.bpmn")
     public void nested() {
-
+    
       String processDefinitionKey = "subprocess-nested";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
@@ -121,7 +121,5 @@ public class SubprocessTest {
       
       // 判断process instance已经结束
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
-     
-    
     }
 }

@@ -57,15 +57,15 @@ public class GatewayTest {
       String processDefinitionKey = "gateway-none";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
-      taskService.complete(task.getId());
+      Task usertask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      taskService.complete(usertask1.getId());
       
       Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(usertask2.getId());
       
       Task usertask3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       taskService.complete(usertask3.getId());
-
+    
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
      
     }
@@ -84,8 +84,8 @@ public class GatewayTest {
       String processDefinitionKey = "gateway-exclusive";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
-      taskService.complete(task.getId());
+      Task usertask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      taskService.complete(usertask1.getId());
       
       Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       if (usertask2 != null) {
@@ -96,7 +96,7 @@ public class GatewayTest {
       if (usertask3 != null) {
         taskService.complete(usertask3.getId());
       }
-
+    
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
      
     }
@@ -104,7 +104,7 @@ public class GatewayTest {
     /**
      * <pre>
      * 一个user task + parallel gateway + 2个outgoing sequence flow
-     * 从效果上看，和 simple 的例子一样
+     * 从效果上看，和 {@link #gatewayNone()} 的例子一样
      * parallel gateway的outgoing sequence flow上的condition是没用的
      * </pre>
      */
@@ -114,23 +114,22 @@ public class GatewayTest {
       String processDefinitionKey = "gateway-parallel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
-      taskService.complete(task.getId());
+      Task usertask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      taskService.complete(usertask1.getId());
       
       Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(usertask2.getId());
       
       Task usertask3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       taskService.complete(usertask3.getId());
-
+    
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
      
     }
     
     /**
      * <pre>
-     * 一个user task + parallel gateway + 2个outgoing sequence flow
-     * 从效果上看，和 simple 的例子一样
+     * 一个user task + inclusive gateway + 2个outgoing sequence flow
      * inclusive gateway和parallel gateway差不多，但是可以给outgoing sequence flow加condition
      * 只有condition结果为true或者压根没有condition的outgoing sequence flow才会被选择
      * </pre>
@@ -141,15 +140,15 @@ public class GatewayTest {
       String processDefinitionKey = "gateway-inclusive";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
-      taskService.complete(task.getId());
+      Task usertask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      taskService.complete(usertask1.getId());
       
       Task usertask2 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask2").singleResult();
       taskService.complete(usertask2.getId());
       
       Task usertask3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       taskService.complete(usertask3.getId());
-
+    
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
      
     }
@@ -173,8 +172,8 @@ public class GatewayTest {
       String processDefinitionKey = "gateway-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       // 完成一个任务
-      Task task = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
-      taskService.complete(task.getId());
+      Task usertask1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      taskService.complete(usertask1.getId());
       
       // 你可以在这里触发名为abc的signal event，这样的话就不会有usertask2了
       // 也可以选择不触发signal event，等待10秒钟后，usertask2会出现
