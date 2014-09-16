@@ -183,7 +183,7 @@ public class GatewayTest {
         List<Execution> executions = runtimeService
             .createExecutionQuery()
             .processDefinitionKey(processDefinitionKey)
-            .signalEventSubscriptionName("abc")  // process definition里event gateway定义的id
+            .signalEventSubscriptionName("abc")  // 监听abc signal的东西，在本例里是一个intermediate signal catch event
             .list();
         for(Execution execution : executions) {
           runtimeService.signalEventReceived("abc", execution.getId());

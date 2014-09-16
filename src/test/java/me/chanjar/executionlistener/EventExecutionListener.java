@@ -10,10 +10,9 @@ public class EventExecutionListener implements ExecutionListener {
 
   protected Logger logger = LoggerFactory.getLogger(this.getClass());
       
-  protected Expression text;
   @Override
   public void notify(DelegateExecution execution) throws Exception {
-    logger.info(text.getExpressionText());
+    logger.info("Entering EventExecutionListener");
   }
 
 }
