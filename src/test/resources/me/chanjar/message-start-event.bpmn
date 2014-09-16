@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.chanjar.me" id="adhoc-definitions">
+  <message id="msg" name="msg"></message>
+  <process id="message-start-event" name="message-start-event" isExecutable="true">
+    <userTask id="usertask1" name="usertask1"></userTask>
+    <startEvent id="messagestartevent1" name="Message start">
+      <messageEventDefinition messageRef="msg"></messageEventDefinition>
+    </startEvent>
+    <sequenceFlow id="flow14" sourceRef="messagestartevent1" targetRef="usertask1"></sequenceFlow>
+    <endEvent id="endevent2" name="End"></endEvent>
+    <sequenceFlow id="flow15" sourceRef="usertask1" targetRef="endevent2"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_message-start-event">
+    <bpmndi:BPMNPlane bpmnElement="message-start-event" id="BPMNPlane_message-start-event">
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="126.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="messagestartevent1" id="BPMNShape_messagestartevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="36.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="270.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="71.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="126.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="231.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="270.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.chanjar.me" id="adhoc-definitions">
+  <message id="msg" name="msg"></message>
+  <process id="message-boundary-catch" name="message-boundary-catch" isExecutable="true">
+    <endEvent id="endevent2" name="End"></endEvent>
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="usertask1" name="usertask1"></userTask>
+    <sequenceFlow id="flow3" sourceRef="startevent1" targetRef="usertask1"></sequenceFlow>
+    <boundaryEvent id="boundarymessage1" name="Message" attachedToRef="usertask1" cancelActivity="true">
+      <messageEventDefinition messageRef="msg"></messageEventDefinition>
+    </boundaryEvent>
+    <sequenceFlow id="flow4" sourceRef="usertask1" targetRef="endevent2"></sequenceFlow>
+    <userTask id="usertask2" name="usertask2"></userTask>
+    <sequenceFlow id="flow6" sourceRef="boundarymessage1" targetRef="usertask2"></sequenceFlow>
+    <sequenceFlow id="flow7" sourceRef="usertask2" targetRef="endevent2"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_message-boundary-catch">
+    <bpmndi:BPMNPlane bpmnElement="message-boundary-catch" id="BPMNPlane_message-boundary-catch">
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="290.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="30.0" y="190.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="122.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundarymessage1" id="BPMNShape_boundarymessage1">
+        <omgdc:Bounds height="30.0" width="30.0" x="162.0" y="220.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="124.0" y="290.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="65.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="122.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="227.0" y="207.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="207.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="177.0" y="250.0"></omgdi:waypoint>
+        <omgdi:waypoint x="176.0" y="290.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="229.0" y="317.0"></omgdi:waypoint>
+        <omgdi:waypoint x="307.0" y="317.0"></omgdi:waypoint>
+        <omgdi:waypoint x="307.0" y="225.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

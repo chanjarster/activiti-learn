@@ -71,7 +71,7 @@ public class TimerEventTest {
      */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-cancel.bpmn")
-    public void timerBoundaryEventCancelWait() throws InterruptedException {
+    public void timerBoundaryEventTimeoutAndCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       
@@ -90,12 +90,13 @@ public class TimerEventTest {
     /**
      * timer boundary event，定义在usertask1上，5秒钟时长是5秒，cancel activity为true
      * 
-     * 和 {@link #timerBoundaryEventCancelWait()} 一样，只是不人为制造超时
+     * 和 {@link #timerBoundaryEventTimeoutAndCancelActivity()} 一样，只是不人为制造超时
+     * 也就是说task1在5秒钟内完成了
      * @throws InterruptedException
      */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-cancel.bpmn")
-    public void timerBoundaryEventCancelNoWait() throws InterruptedException {
+    public void timerBoundaryEventOnTimeFinishAndCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       
@@ -125,7 +126,7 @@ public class TimerEventTest {
      */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-not-cancel.bpmn")
-    public void timerBoundaryEventNotCancelWait() throws InterruptedException {
+    public void timerBoundaryEventTimeoutAndDontCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-not-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       
@@ -146,7 +147,7 @@ public class TimerEventTest {
     /**
      * timer boundary event，定义在usertask1上，5秒钟时长是5秒，cancel activity为false
      * 
-     * 和 {@link #timerBoundaryEventNotCancelWait()} 一样，只是不人为制造超时
+     * 和 {@link #timerBoundaryEventTimeoutAndDontCancelActivity()} 一样，只是不人为制造超时
      * @throws InterruptedException
      */
     @Test

@@ -13,7 +13,7 @@ public class ThrowBPMNErrorTask implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     logger.error("throw BPMN error");
-    throw new BpmnError("abc2");
+    throw new BpmnError("abc");
   }
 
 }
