@@ -17,9 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * event的测试
- * <pre>
- * </pre>
+ * timer event的测试
  * @author qianjia
  *
  */
