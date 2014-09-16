@@ -5,12 +5,12 @@ activiti-learn
 
 包含以下几个部分：
 
-1. gateway（``GatewayTest.java``）
-2. error event（``ErrorEventTest.java``）
-3. timer event（``TimerEventTest.java``）
-4. signal event（``SignalEventTest.java``）
-5. message event（``MessageEventTest.java``）
-6. sub process（``SubprocessTest.java``）
+1. ``GatewayTest.java``，gateway的例子
+2. ``ErrorEventTest.java``，error event的例子
+3. ``TimerEventTest.java``，timer event的例子
+4. ``SignalEventTest.java``，signal event的例子
+5. ``MessageEventTest.java``，message event的例子
+6. ``SubprocessTest.java``，sub process的例子
 
 所有代码都以JUnit4单元测试代码的形式编写。
 
@@ -28,7 +28,7 @@ chmod +x bin/h2.sh
 bin/h2.sh
 ```
 
-在打开的浏览器，将``Saved Settings``选择为``Generic H2 (Server)``。在``JDBC URL``里填写``jdbc:h2:tcp://localhost/~/activiti-learn``。
+在打开的浏览器里，将``Saved Settings``选择为``Generic H2 (Server)``。在``JDBC URL``里填写``jdbc:h2:tcp://localhost/~/activiti-learn``。
 
 
 然后可以运行以下命令执行所有单元测试代码：
