@@ -3,16 +3,9 @@ activiti-learn
 
 本项目包含了一系列工作流引擎[Activiti](http://www.activiti.org/)的样例代码。
 
-包含以下几个部分：
+所有代码都以JUnit4单元测试，请结合本项目的[Wiki](https://github.com/chanjarster/activiti-learn/wiki)来使用本项目。
 
-1. ``GatewayTest.java``，gateway的例子
-2. ``ErrorEventTest.java``，error event的例子
-3. ``TimerEventTest.java``，timer event的例子
-4. ``SignalEventTest.java``，signal event的例子
-5. ``MessageEventTest.java``，message event的例子
-6. ``SubprocessTest.java``，sub process的例子
-
-所有代码都以JUnit4单元测试代码的形式编写。关于这些测试用例的详解解释可以看本项目的[Wiki](https://github.com/chanjarster/activiti-learn/wiki)。
+## 如何运行
 
 运行前，需要安装[h2database](http://www.h2database.com/html/main.html)。
 
