@@ -14,18 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-/**
- * sub process的测试
- * <pre>
- * sub process必须有一个start event，否则流程无法启动
- * sub process里可以有也可以没有end event
- * sub process里的end event只对其所属的sub process有效，不会导致整个流程结束
- * sub process里的task都结束的时候，才会结束
- * 当启动sub process的时候，会产生一条ACT_RU_EXECUTION记录，只要sub process没有结束，会一直存在
- * </pre>
- * @author qianjia
- *
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:springTypicalUsageTest-context.xml")
 public class SubprocessTest {
@@ -40,9 +28,6 @@ public class SubprocessTest {
     @Rule
     public ActivitiRule activitiSpringRule;
     
-    /**
-     * 在subprocess里没有end event
-     */
     @Test
     @Deployment(resources="me/chanjar/subprocess-without-end-event.bpmn")
     public void withoutEndEvent() {
@@ -65,9 +50,6 @@ public class SubprocessTest {
      
     }
     
-    /**
-     * 在subprocess里有end event
-     */
     @Test
     @Deployment(resources="me/chanjar/subprocess-with-end-event.bpmn")
     public void withEndEvent() {
@@ -94,9 +76,6 @@ public class SubprocessTest {
      
     }
     
-    /**
-     * 测试嵌套的sub process
-     */
     @Test
     @Deployment(resources="me/chanjar/subprocess-nested.bpmn")
     public void nested() {

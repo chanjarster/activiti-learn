@@ -14,13 +14,13 @@
     <sequenceFlow id="flow2" sourceRef="messagestartevent2" targetRef="endevent2"></sequenceFlow>
     <sequenceFlow id="flow3" sourceRef="usertask1" targetRef="endevent2"></sequenceFlow>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_message-start-event">
-    <bpmndi:BPMNPlane bpmnElement="message-start-event" id="BPMNPlane_message-start-event">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_message-start-event-duplicate">
+    <bpmndi:BPMNPlane bpmnElement="message-start-event-duplicate" id="BPMNPlane_message-start-event-duplicate">
       <bpmndi:BPMNShape bpmnElement="messagestartevent1" id="BPMNShape_messagestartevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="36.0" y="120.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
-        <omgdc:Bounds height="35.0" width="35.0" x="360.0" y="120.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="280.0" y="120.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
         <omgdc:Bounds height="55.0" width="105.0" x="116.0" y="110.0"></omgdc:Bounds>
@@ -33,12 +33,13 @@
         <omgdi:waypoint x="116.0" y="137.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
-        <omgdi:waypoint x="57.0" y="220.0"></omgdi:waypoint>
-        <omgdi:waypoint x="377.0" y="155.0"></omgdi:waypoint>
+        <omgdi:waypoint x="75.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="297.0" y="237.0"></omgdi:waypoint>
+        <omgdi:waypoint x="297.0" y="155.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
         <omgdi:waypoint x="221.0" y="137.0"></omgdi:waypoint>
-        <omgdi:waypoint x="360.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="280.0" y="137.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

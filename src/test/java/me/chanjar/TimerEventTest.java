@@ -16,11 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-/**
- * timer event的测试
- * @author qianjia
- *
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:springTypicalUsageTest-context.xml")
 public class TimerEventTest {
@@ -35,13 +30,6 @@ public class TimerEventTest {
     @Rule
     public ActivitiRule activitiSpringRule;
     
-    /**
-     * timer start event，定为5秒钟后进入usertask1
-     * 1. subprocess不能有timer start event
-     * 2. timer start event在部署的时候就自动启动了，不需要runtimeService.startProcessInstanceByXXX 
-     * 3. 如果部署了一个新版本升级了，那么原先的定时器就被删除了 
-     * @throws InterruptedException 
-     */
     @Test
     @Deployment(resources="me/chanjar/timer-start-event.bpmn")
     public void timerStartEvent() throws InterruptedException {
@@ -56,19 +44,6 @@ public class TimerEventTest {
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }
     
-    /**
-     * timer boundary event，定义在usertask1上，5秒钟时长是5秒，cancel activity为true
-     * 
-     * <pre>
-     * 当流程走到usertask1上的时候，如果在5秒钟内没有完成usertask1
-     * 那么就会取消usertask1，并进入到usertask2上，完成usertask2才能结束流程
-     * 相反，如果在5秒钟内完成了usertask1，那么流程就直接结束了
-     * 
-     * 本例人为制造超时
-     * </pre>
-     * @throws InterruptedException 
-     * 
-     */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-cancel.bpmn")
     public void timerBoundaryEventTimeoutAndCancelActivity() throws InterruptedException {
@@ -87,13 +62,6 @@ public class TimerEventTest {
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }
     
-    /**
-     * timer boundary event，定义在usertask1上，5秒钟时长是5秒，cancel activity为true
-     * 
-     * 和 {@link #timerBoundaryEventTimeoutAndCancelActivity()} 一样，只是不人为制造超时
-     * 也就是说task1在5秒钟内完成了
-     * @throws InterruptedException
-     */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-cancel.bpmn")
     public void timerBoundaryEventFinishOnTimeAndCancelActivity() throws InterruptedException {
@@ -111,19 +79,6 @@ public class TimerEventTest {
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }
     
-    /**
-     * timer boundary event，定义在usertask1上，5秒钟时长是5秒，cancel activity为false
-     * 
-     * <pre>
-     * 当流程走到usertask1上的时候，如果在5秒钟内没有完成usertask1
-     * 那么会产生一条usertask2，完成usertask1,2才能结束流程
-     * 相反，如果5秒钟内完成了usertask1，那么流程就直接结束了，
-     * 
-     * 本例人为制造超时
-     * </pre>
-     * @throws InterruptedException 
-     * 
-     */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-not-cancel.bpmn")
     public void timerBoundaryEventTimeoutAndNotCancelActivity() throws InterruptedException {
@@ -144,12 +99,6 @@ public class TimerEventTest {
      
     }
     
-    /**
-     * timer boundary event，定义在usertask1上，5秒钟时长是5秒，cancel activity为false
-     * 
-     * 和 {@link #timerBoundaryEventTimeoutAndNotCancelActivity()} 一样，只是不人为制造超时
-     * @throws InterruptedException
-     */
     @Test
     @Deployment(resources="me/chanjar/timer-boundary-event-not-cancel.bpmn")
     public void timerBoundaryEventFinishOnTimeAndNotCancel() throws InterruptedException {
@@ -168,14 +117,6 @@ public class TimerEventTest {
      
     }
     
-    /**
-     * timer intermediate catching event，定义时长为5秒钟
-     * 
-     * 当5秒钟一过，才会进入到usertask1里
-     * 
-     * 可以结合event gateway使用，参考 {@link GatewayTest#eventGateway()}
-     * @throws InterruptedException
-     */
     @Test
     @Deployment(resources="me/chanjar/timer-intermediate-catch-event.bpmn")
     public void timerIntermediateCatchEvent() throws InterruptedException {

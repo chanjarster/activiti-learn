@@ -20,14 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-/**
- * message event的测试
- * message和signal一样是传播的，但是只能有一个接受者。
- * 
- * Activiti并不关心实际接收到的message，message event主要用来结JMS Queue/Topic或者用来处理Webservice or REST request的请求
- * @author qianjia
- *
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:springTypicalUsageTest-context.xml")
 public class MessageEventTest {
@@ -45,16 +37,6 @@ public class MessageEventTest {
     @Rule
     public ActivitiRule activitiSpringRule;
     
-    /**
-     * message start event的例子
-     * <pre>
-     * 在这个例子里，process instance的启动不应该使用
-     * runtimeService.startProcessInstanceByKey
-     * 
-     * 而应该使用
-     * runtimeService.startProcessInstanceByMessage
-     * </pre>
-     */
     @Test
     @Deployment(resources = "me/chanjar/message-start-event.bpmn")
     public void messageStartEvent() {
@@ -69,12 +51,6 @@ public class MessageEventTest {
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }
     
-    /**
-     * 这个例子用来说明
-     * 
-     * 在跨process definition的情况下，不能有多于一个message start event监听同一个msg
-     * </pre>
-     */
     @Test(expected=ActivitiException.class)
     public void duplicateMessageStartEventCrossProcessDefinitions() {
       repositoryService
@@ -84,26 +60,14 @@ public class MessageEventTest {
         .deploy();
     }
     
-    /**
-     * 这个例子用来说明
-     * 
-     * 在同一个process definition里，不能有多于一个message start event监听同一个msg
-     */
     @Test(expected=ActivitiException.class)
     public void duplicateMessageStartEventInSameProcessDefinition() {
       repositoryService
       .createDeployment()
-      .addClasspathResource("me/chanjar/message-start-event-3.bpmn")
+      .addClasspathResource("me/chanjar/message-start-event-duplicate.bpmn")
       .deploy();
     }
     
-    /**
-     * <pre>
-     * 在这个例子里，我们使用intermediate message catch event，
-     * 并在java代码里给每一个process instance发送消息。
-     * 这是因为 “message只能有一个接受者”
-     * </pre>
-     */
     @Test
     @Deployment(resources="me/chanjar/message-intermediate-event-catch.bpmn")
     public void messageIntermediateCatch() {
@@ -119,11 +83,6 @@ public class MessageEventTest {
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }
     
-    /**
-     * 在某个User Task的时候抛出message
-     * 
-     * signal必须严格匹配
-     */
     @Test
     @Deployment(resources="me/chanjar/message-boundary-catch.bpmn")
     public void messageBoundaryCatch() {
@@ -143,9 +102,6 @@ public class MessageEventTest {
       assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(processDefinitionKey).count());
     }
     
-    /**
-     *  发送message
-     */
     private void sendMessage(String processDefinitionKey) {
       List<Execution> executions = runtimeService
           .createExecutionQuery()

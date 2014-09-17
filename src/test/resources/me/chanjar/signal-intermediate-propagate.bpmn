@@ -19,18 +19,18 @@
         <omgdc:Bounds height="35.0" width="35.0" x="10.0" y="168.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="signalintermediatecatchevent2" id="BPMNShape_signalintermediatecatchevent2">
-        <omgdc:Bounds height="35.0" width="35.0" x="260.0" y="168.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="120.0" y="168.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="520.0" y="168.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="240.0" y="168.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
-        <omgdi:waypoint x="295.0" y="185.0"></omgdi:waypoint>
-        <omgdi:waypoint x="520.0" y="185.0"></omgdi:waypoint>
+        <omgdi:waypoint x="155.0" y="185.0"></omgdi:waypoint>
+        <omgdi:waypoint x="240.0" y="185.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
         <omgdi:waypoint x="45.0" y="185.0"></omgdi:waypoint>
-        <omgdi:waypoint x="260.0" y="185.0"></omgdi:waypoint>
+        <omgdi:waypoint x="120.0" y="185.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
