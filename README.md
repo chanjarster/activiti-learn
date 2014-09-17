@@ -12,7 +12,7 @@ activiti-learn
 5. ``MessageEventTest.java``，message event的例子
 6. ``SubprocessTest.java``，sub process的例子
 
-所有代码都以JUnit4单元测试代码的形式编写。
+所有代码都以JUnit4单元测试代码的形式编写。关于这些测试用例的详解解释可以看本项目的[Wiki](/wiki)。
 
 运行前，需要安装[h2database](http://www.h2database.com/html/main.html)。
 
@@ -37,4 +37,4 @@ bin/h2.sh
 mvn clean test
 ```
 
-也可以在eclipse里选择单独的代码执行。
+也可以在eclipse里选择单独的JUnit测试用例执行。
