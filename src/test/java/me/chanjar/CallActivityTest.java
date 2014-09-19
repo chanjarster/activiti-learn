@@ -40,11 +40,43 @@ public class CallActivityTest {
     public void test() throws InterruptedException {
       String mainProcessDefinitionKey = "call-activity-main";
       String subProcessDefinitionKey = "call-activity-sub";
+      String businessKey = "businessKey";
       Map<String, Object> variables = new HashMap<String, Object>();
       /*
        * 在这里设置了a_in_sub是没用的，因为parent process instance里的变量名
        * 是不共享到sub process instance的
        */
+      variables.put("a_in_main", Boolean.TRUE);
+      variables.put("businessKey", businessKey);
+      // variables.put("a_in_sub", Boolean.TRUE);
+
+      runtimeService.startProcessInstanceByKey(mainProcessDefinitionKey, businessKey, variables);
+      
+      // 当走到call activity的时候，会产生一条新的process instance，而这个process instance是属于call activity的
+      assertEquals(2, runtimeService.createProcessInstanceQuery().count());
+
+      // 完成一个任务
+      Task task = taskService
+            .createTaskQuery()
+            // 必须是根据sub process的definition key来查找task
+            .processDefinitionKey(subProcessDefinitionKey)
+            // 如果找到和这个process instance关联的sub process instance里的task
+            // 就要用到在sub process instance里设置的变量
+            .processVariableValueEquals("businessKey", businessKey)
+            .taskDefinitionKey("usertask1")
+            .singleResult();
+      taskService.complete(task.getId());
+      
+      // 判断process instance已经结束
+      assertEquals(0, runtimeService.createProcessInstanceQuery().processDefinitionKey(mainProcessDefinitionKey).count());
+    }
+    
+    @Test
+    @Deployment(resources={"me/chanjar/call/call-activity-main.bpmn", "me/chanjar/call/call-activity-sub.bpmn"})
+    public void test2() throws InterruptedException {
+      String mainProcessDefinitionKey = "call-activity-main";
+      String subProcessDefinitionKey = "call-activity-sub";
+      Map<String, Object> variables = new HashMap<String, Object>();
       variables.put("a_in_main", Boolean.TRUE);
       // variables.put("a_in_sub", Boolean.TRUE);
 
@@ -52,7 +84,7 @@ public class CallActivityTest {
       
       // 当走到call activity的时候，会产生一条新的process instance，而这个process instance是属于call activity的
       assertEquals(2, runtimeService.createProcessInstanceQuery().count());
-
+      
       // 完成一个任务
       Task task = taskService
             .createTaskQuery()

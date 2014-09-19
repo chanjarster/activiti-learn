@@ -5,6 +5,7 @@
     <callActivity id="callactivity1" name="Call activity" calledElement="call-activity-sub">
       <extensionElements>
         <activiti:in source="a_in_main" target="a_in_sub"></activiti:in>
+        <activiti:in source="businessKey" target="businessKey"></activiti:in>
       </extensionElements>
     </callActivity>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="callactivity1"></sequenceFlow>
