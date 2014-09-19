@@ -31,7 +31,7 @@ public class TimerEventTest {
     public ActivitiRule activitiSpringRule;
     
     @Test
-    @Deployment(resources="me/chanjar/timer-start-event.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-start-event.bpmn")
     public void timerStartEvent() throws InterruptedException {
       String processDefinitionKey = "timer-start-event";
       
@@ -45,7 +45,7 @@ public class TimerEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/timer-boundary-event-cancel.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-boundary-event-cancel.bpmn")
     public void timerBoundaryEventTimeoutAndCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -63,7 +63,7 @@ public class TimerEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/timer-boundary-event-cancel.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-boundary-event-cancel.bpmn")
     public void timerBoundaryEventFinishOnTimeAndCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -80,7 +80,7 @@ public class TimerEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/timer-boundary-event-not-cancel.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-boundary-event-not-cancel.bpmn")
     public void timerBoundaryEventTimeoutAndNotCancelActivity() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-not-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -100,7 +100,7 @@ public class TimerEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/timer-boundary-event-not-cancel.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-boundary-event-not-cancel.bpmn")
     public void timerBoundaryEventFinishOnTimeAndNotCancel() throws InterruptedException {
       String processDefinitionKey = "timer-boundary-event-not-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -118,7 +118,7 @@ public class TimerEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/timer-intermediate-catch-event.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-intermediate-catch-event.bpmn")
     public void timerIntermediateCatchEvent() throws InterruptedException {
       String processDefinitionKey = "timer-intermediate-catch-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);

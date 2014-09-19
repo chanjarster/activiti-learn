@@ -32,7 +32,7 @@ public class GatewayTest {
     public ActivitiRule activitiSpringRule;
     
     @Test
-    @Deployment(resources="me/chanjar/gateway-none.bpmn")
+    @Deployment(resources="me/chanjar/gateway/gateway-none.bpmn")
     public void gatewayNone() {
       String processDefinitionKey = "gateway-none";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -52,7 +52,7 @@ public class GatewayTest {
     
     
     @Test
-    @Deployment(resources="me/chanjar/gateway-exclusive.bpmn")
+    @Deployment(resources="me/chanjar/gateway/gateway-exclusive.bpmn")
     public void exclusiveGateway() {
       String processDefinitionKey = "gateway-exclusive";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -75,7 +75,7 @@ public class GatewayTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/gateway-parallel.bpmn")
+    @Deployment(resources="me/chanjar/gateway/gateway-parallel.bpmn")
     public void parallelGateway() {
       String processDefinitionKey = "gateway-parallel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -94,7 +94,7 @@ public class GatewayTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/gateway-inclusive.bpmn")
+    @Deployment(resources="me/chanjar/gateway/gateway-inclusive.bpmn")
     public void inclusivelGateway() {
       String processDefinitionKey = "gateway-inclusive";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -113,7 +113,7 @@ public class GatewayTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/gateway-event.bpmn")
+    @Deployment(resources="me/chanjar/gateway/gateway-event.bpmn")
     public void eventGateway() throws InterruptedException {
       String processDefinitionKey = "gateway-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);

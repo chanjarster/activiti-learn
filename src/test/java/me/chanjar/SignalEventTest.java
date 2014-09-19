@@ -32,7 +32,7 @@ public class SignalEventTest {
     public ActivitiRule activitiSpringRule;
     
     @Test
-    @Deployment(resources="me/chanjar/signal-intermediate-catch.bpmn")
+    @Deployment(resources="me/chanjar/signal/signal-intermediate-catch.bpmn")
     public void signalIntermediateCatch() {
       String processDefinitionKey = "signal-intermediate-catch";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -51,7 +51,7 @@ public class SignalEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/signal-intermediate-catch-2.bpmn")
+    @Deployment(resources="me/chanjar/signal/signal-intermediate-catch-2.bpmn")
     public void signalIntermediateCatch2() throws InterruptedException {
       String processDefinitionKey = "signal-intermediate-catch-2";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -71,7 +71,7 @@ public class SignalEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/signal-intermediate-catch-bad.bpmn")
+    @Deployment(resources="me/chanjar/signal/signal-intermediate-catch-bad.bpmn")
     public void signalIntermediateCatchBad() throws InterruptedException {
       String processDefinitionKey = "signal-intermediate-catch-bad";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -86,7 +86,7 @@ public class SignalEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/signal-boundary-catch.bpmn")
+    @Deployment(resources="me/chanjar/signal/signal-boundary-catch.bpmn")
     public void signalBoundaryCatch() {
       String processDefinitionKey = "signal-boundary-catch";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -102,7 +102,7 @@ public class SignalEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/signal-boundary-catch-from-outside.bpmn")
+    @Deployment(resources="me/chanjar/signal/signal-boundary-catch-from-outside.bpmn")
     public void signalBoundaryCatchFromOutside() {
       String processDefinitionKey = "signal-boundary-catch-from-outside";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -123,7 +123,7 @@ public class SignalEventTest {
     
     
     @Test
-    @Deployment(resources="me/chanjar/signal-boundary-catch-from-outside-not-cancel.bpmn")
+    @Deployment(resources="me/chanjar/signal/signal-boundary-catch-from-outside-not-cancel.bpmn")
     public void signalBoundaryCatchFromOutsideAndNotCancelActivity() {
       String processDefinitionKey = "signal-boundary-catch-from-outside-not-cancel";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -144,7 +144,7 @@ public class SignalEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/signal-intermediate-propagate.bpmn")
+    @Deployment(resources="me/chanjar/signal/signal-intermediate-propagate.bpmn")
     public void signalIntermediateCatchPropagate() {
       String processDefinitionKey = "signal-intermediate-propagate";
       // 建立两个process instance

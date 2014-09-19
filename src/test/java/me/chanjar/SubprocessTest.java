@@ -29,7 +29,7 @@ public class SubprocessTest {
     public ActivitiRule activitiSpringRule;
     
     @Test
-    @Deployment(resources="me/chanjar/subprocess-without-end-event.bpmn")
+    @Deployment(resources="me/chanjar/subprocess/subprocess-without-end-event.bpmn")
     public void withoutEndEvent() {
       String processDefinitionKey = "subprocess-without-end-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -51,7 +51,7 @@ public class SubprocessTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/subprocess-with-end-event.bpmn")
+    @Deployment(resources="me/chanjar/subprocess/subprocess-with-end-event.bpmn")
     public void withEndEvent() {
       String processDefinitionKey = "subprocess-with-end-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -77,7 +77,7 @@ public class SubprocessTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/subprocess-nested.bpmn")
+    @Deployment(resources="me/chanjar/subprocess/subprocess-nested.bpmn")
     public void nested() {
     
       String processDefinitionKey = "subprocess-nested";

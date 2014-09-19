@@ -38,7 +38,7 @@ public class MessageEventTest {
     public ActivitiRule activitiSpringRule;
     
     @Test
-    @Deployment(resources = "me/chanjar/message-start-event.bpmn")
+    @Deployment(resources = "me/chanjar/message/message-start-event.bpmn")
     public void messageStartEvent() {
       String processDefinitionKey = "message-start-event";
       runtimeService.startProcessInstanceByMessage("msg");
@@ -55,8 +55,8 @@ public class MessageEventTest {
     public void duplicateMessageStartEventCrossProcessDefinitions() {
       repositoryService
         .createDeployment()
-        .addClasspathResource("me/chanjar/message-start-event.bpmn")
-        .addClasspathResource("me/chanjar/message-start-event-2.bpmn")
+        .addClasspathResource("me/chanjar/message/message-start-event.bpmn")
+        .addClasspathResource("me/chanjar/message/message-start-event-2.bpmn")
         .deploy();
     }
     
@@ -64,12 +64,12 @@ public class MessageEventTest {
     public void duplicateMessageStartEventInSameProcessDefinition() {
       repositoryService
       .createDeployment()
-      .addClasspathResource("me/chanjar/message-start-event-duplicate.bpmn")
+      .addClasspathResource("me/chanjar/message/message-start-event-duplicate.bpmn")
       .deploy();
     }
     
     @Test
-    @Deployment(resources="me/chanjar/message-intermediate-event-catch.bpmn")
+    @Deployment(resources="me/chanjar/message/message-intermediate-event-catch.bpmn")
     public void messageIntermediateCatch() {
       String processDefinitionKey = "message-intermediate-event-catch";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -84,7 +84,7 @@ public class MessageEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/message-boundary-catch.bpmn")
+    @Deployment(resources="me/chanjar/message/message-boundary-catch.bpmn")
     public void messageBoundaryCatch() {
       String processDefinitionKey = "message-boundary-catch";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);

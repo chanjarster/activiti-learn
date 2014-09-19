@@ -29,7 +29,7 @@ public class ErrorEventTest {
     public ActivitiRule activitiSpringRule;
     
     @Test
-    @Deployment(resources="me/chanjar/error-start-event.bpmn")
+    @Deployment(resources="me/chanjar/error/error-start-event.bpmn")
     public void errorStartEvent() throws InterruptedException {
       String processDefinitionKey = "error-start-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -48,7 +48,7 @@ public class ErrorEventTest {
     
     
     @Test
-    @Deployment(resources="me/chanjar/error-boundary-event.bpmn")
+    @Deployment(resources="me/chanjar/error/error-boundary-event.bpmn")
     public void errorBoundaryEvent() throws InterruptedException {
       String processDefinitionKey = "error-boundary-event";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
@@ -66,7 +66,7 @@ public class ErrorEventTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/error-boundary-event-throw-bpmn-error.bpmn")
+    @Deployment(resources="me/chanjar/error/error-boundary-event-throw-bpmn-error.bpmn")
     public void throwBPMNErrors() {
       String processDefinitionKey = "error-boundary-event-throw-bpmn-error";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);

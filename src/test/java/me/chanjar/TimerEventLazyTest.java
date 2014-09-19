@@ -37,11 +37,11 @@ public class TimerEventLazyTest {
     
     @Test(expected=org.activiti.engine.ActivitiException.class)
     public void timerStartEvent() throws InterruptedException {
-      repositoryService.createDeployment().addClasspathResource("me/chanjar/timer-start-event-lazy.bpmn").deploy();
+      repositoryService.createDeployment().addClasspathResource("me/chanjar/timer/timer-start-event-lazy.bpmn").deploy();
     }
     
     @Test
-    @Deployment(resources="me/chanjar/timer-intermediate-catch-event-lazy.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-intermediate-catch-event-lazy.bpmn")
     public void timerIntermediateCatchEvent() throws InterruptedException {
       String processDefinitionKey = "timer-intermediate-catch-event-lazy";
       Map<String, Object> variables = new HashMap<String, Object>();
@@ -58,7 +58,7 @@ public class TimerEventLazyTest {
     }
     
     @Test
-    @Deployment(resources="me/chanjar/timer-intermediate-catch-event-lazy-2.bpmn")
+    @Deployment(resources="me/chanjar/timer/timer-intermediate-catch-event-lazy-2.bpmn")
     public void timerIntermediateCatchEvent2() throws InterruptedException {
       String processDefinitionKey = "timer-intermediate-catch-event-lazy-2";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);

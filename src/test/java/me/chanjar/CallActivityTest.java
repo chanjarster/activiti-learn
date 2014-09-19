@@ -36,7 +36,7 @@ public class CallActivityTest {
     public RepositoryService repositoryService;
     
     @Test
-    @Deployment(resources={"me/chanjar/call-activity-main.bpmn", "me/chanjar/call-activity-sub.bpmn"})
+    @Deployment(resources={"me/chanjar/call/call-activity-main.bpmn", "me/chanjar/call/call-activity-sub.bpmn"})
     public void test() throws InterruptedException {
       String mainProcessDefinitionKey = "call-activity-main";
       String subProcessDefinitionKey = "call-activity-sub";
