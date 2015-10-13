@@ -1,11 +1,9 @@
 package me.chanjar;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.activiti.engine.ActivitiException;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -43,12 +41,20 @@ public class EventSubprocessTest {
       String processDefinitionKey = "event-subprocess";
       runtimeService.startProcessInstanceByKey(processDefinitionKey);
       
+      // usertask1 is not null
+      Task task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      assertNotNull(task1);
+      
+      // send a message and trigger event sub-process
       sendMessage(processDefinitionKey);
+      
+      // complete usertask3 in event sub-process
       Task task3 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask3").singleResult();
       taskService.complete(task3.getId());
 
-      // 完成一个任务
-      Task task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      // trying to get usertask1 again
+      task1 = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskDefinitionKey("usertask1").singleResult();
+      // but usertask1 disappeared
       taskService.complete(task1.getId());
       
       // 判断process instance已经结束
@@ -59,7 +65,7 @@ public class EventSubprocessTest {
       List<Execution> executions = runtimeService
           .createExecutionQuery()
           .processDefinitionKey(processDefinitionKey)
-          .messageEventSubscriptionName("abc") // 监听msg message的东西，在本例里是一个intermediate message catch event
+          .messageEventSubscriptionName("abc")
           .list();
       for(Execution execution : executions) {
         runtimeService.messageEventReceived("abc", execution.getId());
