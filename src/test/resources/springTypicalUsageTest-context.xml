@@ -10,8 +10,8 @@
 
   <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
     <property name="driverClass" value="org.h2.Driver" />
-    <property name="url" value="jdbc:h2:tcp://localhost/~/activiti-learn" />
-<!--     <property name="url" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000" /> -->
+    <!--<property name="url" value="jdbc:h2:tcp://localhost/~/activiti-learn" />-->
+     <property name="url" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000" />
     <property name="username" value="sa" />
     <property name="password" value="" />
   </bean>
@@ -44,4 +44,12 @@
 
   <tx:annotation-driven transaction-manager="transactionManager"/>
 
+  <bean id="simpleBean" class="me.chanjar.listenertest.SimpleBean" />
+  <bean id="simpleBeanWithFieldInjection" class="me.chanjar.listenertest.SimpleBeanWithFieldInjection" />
+
+  <bean id="listenerDelegateBean" class="me.chanjar.listenertest.ListenerDelegateBean" />
+  <bean id="listenerDelegateBeanWithFieldInjection" class="me.chanjar.listenertest.ListenerDelegateBeanWithFieldInjection" />
+
+  <bean id="taskListenerBean" class="me.chanjar.listenertest.TaskListenerBean" />
+  <bean id="taskListenerBeanWithFieldInjection" class="me.chanjar.listenertest.TaskListenerBeanWithFieldInjection" scope="prototype"/>
 </beans>

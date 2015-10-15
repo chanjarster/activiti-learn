@@ -17,3 +17,4 @@ target
 .bpmn
 
 .settings
+*.iml
