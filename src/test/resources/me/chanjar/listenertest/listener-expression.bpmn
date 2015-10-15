@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
   <process id="listener-expression" name="My process" isExecutable="true">
+    <extensionElements>
+      <activiti:executionListener event="end" expression="#{simpleBean.inExpression(execution, &quot;end process event&quot;, &quot;abc&quot;)}"></activiti:executionListener>
+    </extensionElements>
     <startEvent id="startevent1" name="Start">
       <extensionElements>
         <activiti:executionListener event="start" expression="#{simpleBean.inExpression(execution, &quot;123&quot;, &quot;abc&quot;)}"></activiti:executionListener>
@@ -13,7 +16,7 @@
         </activiti:executionListener>
       </extensionElements>
     </startEvent>
-    <userTask id="usertask1" name="User Task1" activiti:assignee="abc">
+    <userTask id="usertask1" name="User Task1" activiti:candidateUsers="${candidateUserGetter.get(execution)}" activiti:candidateGroups="${candidateGroupGetter.get(execution)}">
       <extensionElements>
         <activiti:taskListener event="create" expression="#{simpleBean.inExpression(execution, &quot;123&quot;, &quot;abc&quot;)}"></activiti:taskListener>
         <activiti:taskListener event="create" expression="#{simpleBeanWithFieldInjection.inExpression(execution, &quot;abc&quot;, &quot;123&quot;)}"></activiti:taskListener>
@@ -26,7 +29,7 @@
       </extensionElements>
     </userTask>
     <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="usertask1"></sequenceFlow>
-    <userTask id="usertask2" name="User Task2">
+    <userTask id="usertask2" name="User Task2" activiti:assignee="${assigneeGetter.get(execution)}">
       <extensionElements>
         <activiti:taskListener event="create" delegateExpression="${taskListenerBeanWithFieldInjection}">
           <activiti:field name="text1">
@@ -36,7 +39,11 @@
       </extensionElements>
     </userTask>
     <sequenceFlow id="flow3" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
-    <endEvent id="endevent2" name="End"></endEvent>
+    <endEvent id="endevent2" name="End">
+      <extensionElements>
+        <activiti:executionListener event="start" expression="#{simpleBean.inExpression(execution, &quot;end event&quot;, &quot;abc&quot;)}"></activiti:executionListener>
+      </extensionElements>
+    </endEvent>
     <sequenceFlow id="flow4" sourceRef="usertask2" targetRef="endevent2"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_listener-expression">

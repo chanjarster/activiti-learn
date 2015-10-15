@@ -15,7 +15,9 @@ public class ListenerDelegateBeanWithFieldInjection implements JavaDelegate{
   public void execute(DelegateExecution execution) throws Exception {
     System.out.println("========================================");
     System.out.println("ListenerDelegateBeanWithFieldInjection: used in delegate expression");
-    System.out.println("parameter delegateExecution: " + execution);
+    System.out.println("parameter execution: " + execution);
+    System.out.println("parameter execution.getCurrentActivityId: " + execution.getCurrentActivityId());
+    System.out.println("parameter execution.getCurrentActivityName: " + execution.getCurrentActivityName());
     System.out.println("field text1: " + text1);
     System.out.println();
   }

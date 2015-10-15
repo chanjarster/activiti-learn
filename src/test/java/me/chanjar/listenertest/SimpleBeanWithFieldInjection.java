@@ -10,10 +10,12 @@ public class SimpleBeanWithFieldInjection {
 
   private Expression text1;
 
-  public void inExpression(DelegateExecution delegateExecution, String a, String b) {
+  public void inExpression(DelegateExecution execution, String a, String b) {
     System.out.println("========================================");
     System.out.println("SimpleBeanWithFieldInjection: used in expression");
-    System.out.println("parameter delegateExecution: " + delegateExecution);
+    System.out.println("parameter execution: " + execution);
+    System.out.println("parameter execution.getCurrentActivityId: " + execution.getCurrentActivityId());
+    System.out.println("parameter execution.getCurrentActivityName: " + execution.getCurrentActivityName());
     System.out.println("parameter a: " + a);
     System.out.println("parameter b: " + b);
     // 当在expression中使用的时候, 无法注入field

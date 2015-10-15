@@ -52,4 +52,9 @@
 
   <bean id="taskListenerBean" class="me.chanjar.listenertest.TaskListenerBean" />
   <bean id="taskListenerBeanWithFieldInjection" class="me.chanjar.listenertest.TaskListenerBeanWithFieldInjection" scope="prototype"/>
+
+  <bean id="candidateUserGetter" class="me.chanjar.listenertest.CandidateUserGetter" />
+  <bean id="candidateGroupGetter" class="me.chanjar.listenertest.CandidateGroupGetter" />
+  <bean id="assigneeGetter" class="me.chanjar.listenertest.AssigneeGetter" />
+
 </beans>
